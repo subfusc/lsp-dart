@@ -129,10 +129,8 @@ Order is important."
 (defun lsp-dart-flutter-snap-install-p ()
   "Detecting whether this is a Linux system with a Snap style install."
   (and (string= system-type "gnu/linux")
-       (let ((first-dir (-some-> (executable-find lsp-dart-flutter-executable) f-split cdr car)))
-         (and first-dir
-              (string= first-dir "snap")
-              (file-exists-p "~/snap/flutter/common/flutter/bin/flutter")))))
+       (member "snap" (-some-> (executable-find lsp-dart-flutter-executable) f-split))
+       (file-exists-p "~/snap/flutter/common/flutter/bin/flutter")))
 
 
 ;; SDKs
